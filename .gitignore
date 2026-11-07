@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env
+*.local
+public/audio/*.mp3
+public/audio/*.flac
+public/audio/*.wav
+public/audio/*.aac
+public/audio/*.ogg
+.DS_Store
+*.log

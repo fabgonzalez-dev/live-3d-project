@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Live 3D Studio — Operator Control Panel" />
+  <title>Live 3D Studio — Control</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/ui/control.css" />
+</head>
+<body>
+  <div id="control-root">
+    <header class="control-header">
+      <div class="header-brand">
+        <span class="brand-dot"></span>
+        <h1>Live 3D Studio</h1>
+      </div>
+      <div class="header-status">
+        <span id="ws-status" class="status-badge status-connecting">Connecting…</span>
+        <a href="/" target="_blank" id="open-display-btn" class="btn-outline">Open Display ↗</a>
+      </div>
+    </header>
+
+    <main class="control-main">
+      <!-- Left column: preview + scene controls -->
+      <section class="col-scene">
+        <div class="panel">
+          <h2>Scene</h2>
+          <div id="scene-selector" class="scene-selector">
+            <button class="scene-btn active" data-scene="tunnel" id="btn-scene-tunnel">Crystal Tunnel</button>
+            <button class="scene-btn" data-scene="city" id="btn-scene-city">Neon City</button>
+            <button class="scene-btn" data-scene="aurora" id="btn-scene-aurora">Aurora Passage</button>
+            <button class="scene-btn" data-scene="garden" id="btn-scene-garden">Cosmic Garden</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Palette</h2>
+          <div id="palette-selector" class="palette-grid">
+            <button class="palette-btn active" data-palette="blue-violet" id="btn-pal-0" style="--c1:#1a0a4a;--c2:#7b2fff">Blue Violet</button>
+            <button class="palette-btn" data-palette="magenta-plum" id="btn-pal-1" style="--c1:#3a0030;--c2:#e040fb">Magenta Plum</button>
+            <button class="palette-btn" data-palette="teal-cyan" id="btn-pal-2" style="--c1:#002a2a;--c2:#00e5ff">Teal Cyan</button>
+            <button class="palette-btn" data-palette="emerald-blue" id="btn-pal-3" style="--c1:#002710;--c2:#00c853">Emerald Blue</button>
+            <button class="palette-btn" data-palette="warm-amber" id="btn-pal-4" style="--c1:#2a1000;--c2:#ff9100">Warm Amber</button>
+            <button class="palette-btn" data-palette="soft-pastel" id="btn-pal-5" style="--c1:#1a1a2e;--c2:#f8bbd0">Soft Pastel</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Transition Duration</h2>
+          <div class="slider-row">
+            <label for="transition-duration">Duration</label>
+            <input type="range" id="transition-duration" min="1" max="20" step="0.5" value="5" />
+            <span id="transition-duration-val" class="val-display">5.0s</span>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Audio Broadcast</h2>
+          <div class="audio-controls">
+            <div class="btn-row" style="display:flex;gap:8px;margin-bottom:12px;">
+              <button id="audio-toggle-btn" class="action-btn" style="flex:1;">🔊 Play / Pause</button>
+              <button id="audio-mute-btn" class="action-btn" style="flex:1;">Mute</button>
+            </div>
+            <div class="slider-row">
+              <label for="audio-volume">Volume</label>
+              <input type="range" id="audio-volume" min="0" max="1" step="0.02" value="0.8" />
+              <span id="audio-volume-val" class="val-display">80%</span>
+            </div>
+            <div class="slider-row">
+              <label for="audio-mode">Mode</label>
+              <select id="audio-mode" class="select-input">
+                <option value="procedural" selected>Generative Ambient Synth</option>
+                <option value="playlist">Playlist Audio</option>
+              </select>
+            </div>
+            <div id="playlist-nav-row" class="btn-row" style="display:none;gap:8px;margin-top:8px;">
+              <button id="audio-prev-btn" class="action-btn" style="flex:1;">⏮ Prev</button>
+              <button id="audio-next-btn" class="action-btn" style="flex:1;">Next ⏭</button>
+            </div>
+            <div style="margin-top:14px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.08);">
+              <h3 style="font-size:12px;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent);margin:0 0 10px 0;">Music Reactivity Engine</h3>
+              <div class="slider-row">
+                <label for="audio-reactivity">Reactivity</label>
+                <input type="range" id="audio-reactivity" min="0" max="2" step="0.05" value="1.0" />
+                <span id="audio-reactivity-val" class="val-display">100%</span>
+              </div>
+              <div class="slider-row">
+                <label for="audio-bass-scale">Bass Boost</label>
+                <input type="range" id="audio-bass-scale" min="0" max="2" step="0.05" value="1.0" />
+                <span id="audio-bass-scale-val" class="val-display">100%</span>
+              </div>
+              <div class="slider-row" style="align-items:center;">
+                <label for="audio-beat-pulse">Rhythmic Beat Pulse</label>
+                <input type="checkbox" id="audio-beat-pulse" checked style="accent-color:var(--accent);cursor:pointer;width:18px;height:18px;" />
+                <span id="audio-beat-pulse-val" class="val-display">On</span>
+              </div>
+            </div>
+            <p style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:8px;margin-bottom:0;">
+              ℹ️ Single-owner audio plays on Display output.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Center column: visual parameters -->
+      <section class="col-visuals">
+        <div class="panel">
+          <h2>Visual Parameters</h2>
+          <div class="slider-row">
+            <label for="travel-speed">Travel Speed</label>
+            <input type="range" id="travel-speed" min="0" max="2" step="0.01" value="0.4" />
+            <span id="travel-speed-val" class="val-display">0.40</span>
+          </div>
+          <div class="slider-row">
+            <label for="rotation-speed">Rotation Speed</label>
+            <input type="range" id="rotation-speed" min="0" max="1" step="0.01" value="0.08" />
+            <span id="rotation-speed-val" class="val-display">0.08</span>
+          </div>
+          <div class="slider-row">
+            <label for="displacement-amp">Displacement</label>
+            <input type="range" id="displacement-amp" min="0" max="1" step="0.01" value="0.35" />
+            <span id="displacement-amp-val" class="val-display">0.35</span>
+          </div>
+          <div class="slider-row">
+            <label for="twist-amount">Twist</label>
+            <input type="range" id="twist-amount" min="0" max="3" step="0.05" value="0.6" />
+            <span id="twist-amount-val" class="val-display">0.60</span>
+          </div>
+          <div class="slider-row">
+            <label for="particle-density">Particles</label>
+            <input type="range" id="particle-density" min="0" max="2" step="1" value="1" />
+            <span id="particle-density-val" class="val-display">Medium</span>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Post Processing</h2>
+          <div class="slider-row">
+            <label for="tone-mapping">Tone Mapping</label>
+            <select id="tone-mapping" class="select-input">
+              <option value="agx" selected>AgX Filmic (Clean Highlights)</option>
+              <option value="aces">ACES Filmic</option>
+            </select>
+          </div>
+          <div class="slider-row">
+            <label for="exposure">Exposure</label>
+            <input type="range" id="exposure" min="0.1" max="3" step="0.05" value="1.0" />
+            <span id="exposure-val" class="val-display">1.00</span>
+          </div>
+          <div class="slider-row">
+            <label for="bloom-strength">Bloom Strength</label>
+            <input type="range" id="bloom-strength" min="0" max="3" step="0.05" value="0.75" />
+            <span id="bloom-strength-val" class="val-display">0.75</span>
+          </div>
+          <div class="slider-row">
+            <label for="bloom-radius">Bloom Radius</label>
+            <input type="range" id="bloom-radius" min="0" max="1" step="0.01" value="0.40" />
+            <span id="bloom-radius-val" class="val-display">0.40</span>
+          </div>
+          <div class="slider-row">
+            <label for="bloom-threshold">Bloom Threshold</label>
+            <input type="range" id="bloom-threshold" min="0" max="1" step="0.01" value="0.35" />
+            <span id="bloom-threshold-val" class="val-display">0.35</span>
+          </div>
+          <div class="slider-row">
+            <label for="vignette-strength">Vignette</label>
+            <input type="range" id="vignette-strength" min="0" max="1" step="0.05" value="0.35" />
+            <span id="vignette-strength-val" class="val-display">0.35</span>
+          </div>
+          <div class="slider-row">
+            <label for="grain-intensity">Film Grain</label>
+            <input type="range" id="grain-intensity" min="0" max="0.06" step="0.005" value="0.02" />
+            <span id="grain-intensity-val" class="val-display">0.02</span>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Render Quality</h2>
+          <div class="slider-row">
+            <label for="quality-preset">Quality Preset</label>
+            <select id="quality-preset" class="select-input">
+              <option value="high" selected>High (Balanced)</option>
+              <option value="ultra">Ultra (Max Quality)</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low (Performance)</option>
+            </select>
+          </div>
+          <div class="slider-row">
+            <label for="render-scale">Render Scale</label>
+            <input type="range" id="render-scale" min="0.5" max="1" step="0.05" value="1.0" />
+            <span id="render-scale-val" class="val-display">100%</span>
+          </div>
+          <div class="slider-row">
+            <label for="fps-target">FPS Target</label>
+            <select id="fps-target" class="select-input">
+              <option value="30" selected>30 fps</option>
+              <option value="60">60 fps</option>
+            </select>
+          </div>
+          <div class="slider-row">
+            <label for="output-res">Output Resolution</label>
+            <select id="output-res" class="select-input">
+              <option value="720x1280" selected>720 × 1280 (Portrait)</option>
+              <option value="1080x1920">1080 × 1920 (Portrait)</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right column: diagnostics, simulator, emergency -->
+      <section class="col-ops">
+        <div class="panel panel-diag">
+          <h2>Diagnostics</h2>
+          <div id="ctrl-diag" class="diag-grid">
+            <span class="diag-label">FPS</span><span id="ctrl-fps" class="diag-value">—</span>
+            <span class="diag-label">Frame Time</span><span id="ctrl-ft" class="diag-value">—</span>
+            <span class="diag-label">Quality</span><span id="ctrl-quality" class="diag-value">—</span>
+            <span class="diag-label">Draw Calls</span><span id="ctrl-dc" class="diag-value">—</span>
+            <span class="diag-label">Triangles</span><span id="ctrl-tris" class="diag-value">—</span>
+            <span class="diag-label">Geometries</span><span id="ctrl-geo" class="diag-value">—</span>
+            <span class="diag-label">Textures</span><span id="ctrl-tex" class="diag-value">—</span>
+            <span class="diag-label">Audio State</span><span id="ctrl-audio" class="diag-value">—</span>
+            <span class="diag-label">Queue Size</span><span id="ctrl-queue" class="diag-value">—</span>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Simulator</h2>
+          <div class="sim-buttons">
+            <button class="sim-btn" id="sim-chat" data-action="chat">💬 Chat</button>
+            <button class="sim-btn" id="sim-like" data-action="likes">❤️ Likes</button>
+            <button class="sim-btn" id="sim-follow" data-action="follow">➕ Follow</button>
+            <button class="sim-btn" id="sim-gift" data-action="gift">🎁 Gift</button>
+            <button class="sim-btn" id="sim-vote-blue" data-action="vote-blue">Vote: Blue</button>
+            <button class="sim-btn" id="sim-vote-pink" data-action="vote-pink">Vote: Pink</button>
+            <button class="sim-btn" id="sim-vote-teal" data-action="vote-teal">Vote: Teal</button>
+            <button class="sim-btn sim-btn-burst" id="sim-burst" data-action="burst">⚡ Burst 100</button>
+          </div>
+        </div>
+
+        <div class="panel panel-emergency">
+          <h2>Emergency</h2>
+          <p class="emergency-desc">Disable viewer interactions while visuals and music continue.</p>
+          <button id="emergency-toggle" class="emergency-btn" data-active="false">
+            Interactions: <strong>ENABLED</strong>
+          </button>
+        </div>
+
+        <div class="panel">
+          <h2>Presets</h2>
+          <div class="preset-controls">
+            <select id="preset-select" class="select-input"><option value="">— Load Preset —</option></select>
+            <button id="preset-save" class="btn-sm">Save Current</button>
+            <button id="preset-export" class="btn-sm">Export JSON</button>
+            <label class="btn-sm btn-file-label" for="preset-import-file">Import JSON</label>
+            <input type="file" id="preset-import-file" accept=".json" class="file-input-hidden" />
+            <button id="preset-reset" class="btn-sm btn-danger">Reset Defaults</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="/src/ui/control.ts"></script>
+</body>
+</html>

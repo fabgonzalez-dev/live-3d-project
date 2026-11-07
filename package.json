@@ -1,0 +1,33 @@
+{
+  "name": "live-3d-studio",
+  "version": "0.1.0",
+  "description": "Immersive interactive 3D broadcast studio with TikTok interaction",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -n \"server,vite\" -c \"cyan,magenta\" \"tsx watch server/index.ts\" \"vite\"",
+    "build": "tsc --noEmit && vite build",
+    "serve": "tsx server/index.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "three": "^0.169.0",
+    "ws": "^8.18.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.0",
+    "@types/three": "^0.169.0",
+    "@types/ws": "^8.5.13",
+    "concurrently": "^9.1.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.3",
+    "vitest": "^2.1.8"
+  }
+}

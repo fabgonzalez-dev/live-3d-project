@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Live 3D Broadcast Display — immersive audiovisual output surface" />
+  <title>Live 3D Studio — Display</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/ui/display.css" />
+</head>
+<body>
+  <div id="display-root">
+    <!-- Three.js canvas will be injected here -->
+    <canvas id="main-canvas"></canvas>
+
+    <!-- Activation overlay — required by browser autoplay policy -->
+    <div id="activation-overlay" class="activation-overlay">
+      <div class="activation-card">
+        <div class="activation-glow"></div>
+        <h1>Live 3D Studio</h1>
+        <p>Click to start the experience and enable audio</p>
+        <button id="start-btn" class="start-button">
+          <span class="start-icon">▶</span>
+          Start Session
+        </button>
+      </div>
+    </div>
+
+    <!-- Minimal broadcast overlay (togglable) -->
+    <div id="broadcast-overlay" class="broadcast-overlay hidden">
+      <div id="vote-instruction" class="vote-instruction"></div>
+      <div id="vote-timer" class="vote-timer"></div>
+    </div>
+
+    <!-- Diagnostics (operator-only, hidden in clean output) -->
+    <div id="diag-panel" class="diag-panel hidden">
+      <span id="diag-fps">FPS: —</span>
+      <span id="diag-quality">Q: —</span>
+      <span id="diag-drawcalls">DC: —</span>
+      <span id="diag-tris">▲: —</span>
+      <span id="diag-conn">WS: —</span>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
